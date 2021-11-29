@@ -1,3 +1,45 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+
+class GroupOfHabits(models.Model):
+    name = models.CharField(max_length=200, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Habit(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    name = models.CharField(max_length=200)
+    group = models.ForeignKey(GroupOfHabits, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
+class WeekOfHabit(models.Model):
+    habit = models.ForeignKey(Habit, on_delete=models.CASCADE)
+
+
+    monday = models.BooleanField(default=False)
+    monday_hours = models.FloatField(default=0, blank=True)
+
+    tuesday = models.BooleanField(default=False)
+    tuesday_hours = models.FloatField(default=0, blank=True)
+
+    wednesday = models.BooleanField(default=False)
+    wednesday_hours = models.FloatField(default=0, blank=True)
+
+    thursday = models.BooleanField(default=False)
+    thursday_hours = models.FloatField(default=0, blank=True)
+
+    friday = models.BooleanField(default=False)
+    friday_hours = models.FloatField(default=0, blank=True)
+
+    saturday = models.BooleanField(default=False)
+    saturday_hours = models.FloatField(default=0, blank=True)
+
+    sunday = models.BooleanField(default=False)
+    sunday_hours = models.FloatField(default=0, blank=True)
+
