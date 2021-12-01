@@ -1,0 +1,103 @@
+{% extends "index.html" %}
+{% block content %}
+
+
+
+<button type="button" class="btn btn-outline-dark btn btn-outline-light me-2" style="float: right;">Restart week</button>
+<button type="button" class="btn btn-outline-dark btn btn-outline-light me-2" style="float: right;">ADD HABIT</button>
+
+<br><br>
+
+
+
+<div class="justify-content-center">
+
+    <div class="bd-example">
+        <table class="table table-sm table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">Habit</th>
+            <th scope="col">Monday</th>
+            <th scope="col">Tuesday</th>
+            <th scope="col">Wednesday</th>
+            <th scope="col">Thursday</th>
+            <th scope="col">Friday</th>
+            <th scope="col">Saturday</th>
+            <th scope="col">Sunday</th>
+            <th scope="col">Total</th>
+          </tr>
+          </thead>
+          {% for habit in habits %}
+          <tbody>
+
+            <td>{{ habit.habit }}</td>
+
+            {% if habit.monday %}
+              <td>+</td>
+            {% else %}
+              <td>-</td>
+            {% endif %}
+
+            {% if habit.tuesday %}
+              <td>+</td>
+            {% else %}
+              <td>-</td>
+            {% endif %}
+
+            {% if habit.wednesday %}
+              <td>+</td>
+            {% else %}
+              <td>-</td>
+            {% endif %}
+
+
+            {% if habit.thursday %}
+              <td>+</td>
+            {% else %}
+              <td>-</td>
+            {% endif %}
+
+            {% if habit.friday %}
+              <td>+</td>
+            {% else %}
+              <td>-</td>
+            {% endif %}
+
+            {% if habit.saturday %}
+              <td>+</td>
+            {% else %}
+              <td>-</td>
+            {% endif %}
+
+            {% if habit.sunday %}
+              <td>+</td>
+            {% else %}
+              <td>-</td>
+            {% endif %}
+
+            <td>-</td>
+          </td>
+          <tr>
+            <td>Hours in a day</td>
+            <td>{{ habit.monday_hours }}</td>
+            <td>{{ habit.tuesday_hours }}</td>
+            <td>{{ habit.wednesday_hours }}</td>
+            <td>{{ habit.thursday_hours }}</td>
+            <td>{{ habit.friday_hours }}</td>
+            <td>{{ habit.saturday_hours }}</td>
+            <td>{{ habit.sunday_hours }}</td>
+            <td>-</td>
+          </tr>
+          </tbody>
+          {% endfor %}
+
+        </table>
+    </div>
+
+</div>
+
+
+
+{% endblock content %}
+
+
