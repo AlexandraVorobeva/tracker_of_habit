@@ -1,7 +1,9 @@
 {% extends "index.html" %}
 {% block content %}
 
-<button type="button" class="btn btn-outline-dark btn btn-outline-light me-2" style="float: right;">ADD HABIT</button>
+<a href="{% url 'habit-create' %}">
+    <button type="button" class="btn btn-outline-dark btn btn-outline-light me-2" style="float: right;">ADD HABIT</button>
+</a>
 
 
 
@@ -14,8 +16,12 @@
 
         <div>
           <h4 class="fw-bold mb-0">{{ habit.name }}</h4>
-          <p>{{ habit.group }}</p>
-           <p><a href="{% url 'habit-delete' %}">Delete<a></a></p>
+
+          <p> <br>
+              <a href="{% url 'habit-delete' habit.id %}">
+                <button type="button" class="btn btn-outline-secondary">Delete</button>
+              </a>
+           </p>
         </div>
       </div>
      {% endfor %}

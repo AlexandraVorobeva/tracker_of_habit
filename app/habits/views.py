@@ -16,6 +16,7 @@ def table_of_week(request):
 
 
 def habit(request):
+
     context = {
         'groups': GroupOfHabits.objects.all(),
         'habits': Habit.objects.all(),
@@ -33,5 +34,12 @@ class HabitDelete(DeleteView):
     model = Habit
     context_object_name = 'habit'
     success_url = reverse_lazy('habit')
+
+
+class WeekOfHabitCreate(CreateView):
+    model = WeekOfHabit
+    fields = ['habit']
+    success_url = reverse_lazy('table')
+    template_name = 'week_habit-form.html'
 
 
