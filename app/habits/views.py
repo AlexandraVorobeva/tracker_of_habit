@@ -18,6 +18,7 @@ class TableOfWeek(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['habits'] = WeekOfHabit.objects.all()
+
         # context['base_habits'] = context['base_habits'].filter(user=self.request.user)
         return context
 
