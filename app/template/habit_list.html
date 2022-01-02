@@ -1,0 +1,50 @@
+{% extends "index.html" %}
+{% block content %}
+
+
+<section class="py-3 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Habits and Categories of habit</h1>
+        <p class="lead text-muted">
+          Create new habits for your table!
+          You can choose any categories that already exist or create new one.<br>
+          Categories:<br>
+          {% for group in groups %}
+            {{ group.name }} (<a href="{% url 'group-delete' group.id %}" class="text-muted">delete</a>)<br>
+          {% endfor %}
+        </p>
+        <p>
+          <a href="{% url 'group-create' %}" class="btn btn-secondary my-2">Add category</a>
+          <a href="{% url 'habit-create' %}" class="btn btn-secondary my-2">Add habit for category</a>
+        </p>
+      </div>
+    </div>
+</section>
+
+<div class="container">
+  <div class="row row-cols-3 row-cols-sm-2 row-cols-md-3 g-3">
+    {% for habit in habits %}
+    <div class="col">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <p class="card-text">{{ habit.name }}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <small class="text-muted">{{ habit.group }}</small>
+            <div class="btn-group">
+              <a href="{% url 'habit-delete' habit.id %}">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Delete habit</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
+
+{% endblock content %}

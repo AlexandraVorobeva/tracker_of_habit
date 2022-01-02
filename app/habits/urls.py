@@ -11,6 +11,7 @@ urlpatterns = [
     path('habit-delete/<int:pk>/', views.HabitDelete.as_view(), name='habit-delete'),
 
     path('week-habit-create/', views.WeekOfHabitCreate.as_view(), name='week-habit-create'),
+    path('week-habit-update/<int:pk>/', views.WeekOfHabitUpdate.as_view(), name='week-habit-update'),
     path('week-habit-delete/<int:pk>/', views.WeekHabitDelete.as_view(), name='week-habit-delete'),
 
     path('group-delete/<int:pk>/', views.GroupOfHabitDelete.as_view(), name='group-delete'),

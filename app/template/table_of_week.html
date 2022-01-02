@@ -19,10 +19,10 @@
         <style class="table table-sm table-bordered">
            table {
             table-layout: fixed;
-            width: 1300px; /* Ширина таблицы */
+            width: 1300px;
             }
             td {
-            border: 1px solid green;
+            border: 1px solid grey;
             }
 
          </style>
@@ -43,12 +43,16 @@
           {% for habit in habits %}
           <tbody>
 
-          <td>{{ habit.habit }} <br><a href="{% url 'week-habit-delete' habit.id %}" class="text-muted">delete from table</a></td>
+          <td>{{ habit.habit }} <br>
+              <a href="{% url 'week-habit-update' habit.id %}" class="text-muted">update</a><br>
+              <a href="{% url 'week-habit-delete' habit.id %}" class="text-muted">delete</a>
+          </td>
+
             <td>
             {% if habit.monday %}
               +
             {% else %}
-              -
+                - <br>
             {% endif %}
           </td>
 
