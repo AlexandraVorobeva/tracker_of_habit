@@ -14,7 +14,19 @@
 <div class="justify-content-center">
 
     <div class="bd-example">
-        <table class="table table-sm table-bordered">
+      <center>
+      <table>
+        <style class="table table-sm table-bordered">
+           table {
+            table-layout: fixed;
+            width: 1300px; /* Ширина таблицы */
+            }
+            td {
+            border: 1px solid green;
+            }
+
+         </style>
+
           <thead>
           <tr>
             <th scope="col">Habit</th>
@@ -31,13 +43,14 @@
           {% for habit in habits %}
           <tbody>
 
-            <td>{{ habit.habit }}</td>
-
+          <td>{{ habit.habit }} <br><a href="{% url 'week-habit-delete' habit.id %}" class="text-muted">delete from table</a></td>
+            <td>
             {% if habit.monday %}
-              <td>+</td>
+              +
             {% else %}
-              <td>-</td>
+              -
             {% endif %}
+          </td>
 
             {% if habit.tuesday %}
               <td>+</td>
@@ -93,6 +106,7 @@
           {% endfor %}
 
         </table>
+        </center>
     </div>
 
 </div>

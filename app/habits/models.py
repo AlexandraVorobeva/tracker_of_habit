@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
 class GroupOfHabits(models.Model):
     name = models.CharField(max_length=200, null=True)
 
@@ -10,7 +11,7 @@ class GroupOfHabits(models.Model):
 
 
 class Habit(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200)
     group = models.ForeignKey(GroupOfHabits, on_delete=models.CASCADE)
 
@@ -19,8 +20,8 @@ class Habit(models.Model):
 
 
 class WeekOfHabit(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     habit = models.ForeignKey(Habit, on_delete=models.CASCADE)
-
 
     monday = models.BooleanField(default=False)
     monday_hours = models.FloatField(default=0, blank=True)
