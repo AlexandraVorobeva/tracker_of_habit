@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('table/', views.TableOfWeek.as_view(), name='table'),
     path('habit/', views.Habits.as_view(), name='habit'),
+    path('contact/', views.contact, name='contact'),
 
     path('habit-create/', views.HabitCreate.as_view(), name='habit-create'),
     path('habit-delete/<int:pk>/', views.HabitDelete.as_view(), name='habit-delete'),

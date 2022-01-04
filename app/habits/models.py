@@ -44,3 +44,4 @@ class WeekOfHabit(models.Model):
     sunday = models.BooleanField(default=False)
     sunday_hours = models.FloatField(default=0, blank=True)
 
+

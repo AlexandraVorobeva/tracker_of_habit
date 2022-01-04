@@ -4,10 +4,15 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
+from django.db.models import Sum
 
 
 def home(request):
     return render(request, 'home.html')
+
+
+def contact(request):
+    return render(request, 'contact.html')
 
 
 class TableOfWeek(LoginRequiredMixin, ListView):
@@ -18,19 +23,10 @@ class TableOfWeek(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['habits'] = WeekOfHabit.objects.all()
-
-        # context['base_habits'] = context['base_habits'].filter(user=self.request.user)
+        context['habits'] = context['habits'].filter(user=self.request.user)
+        # context['totals'] =  'sum' {{ sum }}
         return context
 
-    # model = WeekOfHabit
-    # template_name = 'table_of_week.html'
-    # context_object_name = 'habits'
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['base_habit'] = Habit.objects.all()
-    #     context['base_habit'] = context['base_habit'].filter(user=self.request.user)
-    #     return context
 
 
 class Habits(LoginRequiredMixin, ListView):
@@ -41,13 +37,13 @@ class Habits(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['groups'] = GroupOfHabits.objects.all()
-        # context['habits'] = context['habits'].filter(user=self.request.user)
+        context['habits'] = context['habits'].filter(user=self.request.user)
         return context
 
 
 class HabitCreate(LoginRequiredMixin, CreateView):
     model = Habit
-    fields = ['name', 'group']
+    fields = '__all__'
     success_url = reverse_lazy('habit')
 
 
@@ -62,6 +58,11 @@ class WeekOfHabitCreate(LoginRequiredMixin, CreateView):
     fields = ['habit']
     success_url = reverse_lazy('table')
     template_name = 'table/week_habit_form.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(WeekOfHabitCreate, self).form_valid(form)
+
 
 
 class WeekOfHabitUpdate(LoginRequiredMixin, UpdateView):
