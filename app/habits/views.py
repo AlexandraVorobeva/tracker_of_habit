@@ -24,7 +24,6 @@ class TableOfWeek(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['habits'] = WeekOfHabit.objects.all()
         context['habits'] = context['habits'].filter(user=self.request.user)
-        # context['totals'] =  'sum' {{ sum }}
         return context
 
 
@@ -64,7 +63,6 @@ class WeekOfHabitCreate(LoginRequiredMixin, CreateView):
         return super(WeekOfHabitCreate, self).form_valid(form)
 
 
-
 class WeekOfHabitUpdate(LoginRequiredMixin, UpdateView):
     model = WeekOfHabit
     fields = '__all__'
@@ -76,6 +74,7 @@ class WeekHabitDelete(LoginRequiredMixin, DeleteView):
     model = WeekOfHabit
     context_object_name = 'habit'
     success_url = reverse_lazy('table')
+
 
 
 class GroupOfHabitCreate(LoginRequiredMixin, CreateView):

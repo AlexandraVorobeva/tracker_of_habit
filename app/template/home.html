@@ -8,7 +8,10 @@
         <h1 class="fw-light">Welcome</h1>
         <p class="lead text-muted">
           {% if request.user.is_authenticated %}
-                <p>{{ request.user }}</p>
+                <p>{{ request.user }}, Welcome to TRACKER OF HABITS! We are so excited for you to join us.
+      If you want to stick with a habit for good, one simple and effective thing you can do is keep a habit tracker.<br>
+          We help you to build good habits, reach your goals.
+      </p>
           {% endif %}
 
         </p>

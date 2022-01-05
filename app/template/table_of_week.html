@@ -3,7 +3,6 @@
 
 
 
-<button type="button" class="btn btn-outline-dark btn btn-outline-light me-2" style="float: right;">Restart week</button>
 <a href="{% url 'week-habit-create' %}">
     <button type="button" class="btn btn-outline-dark btn btn-outline-light me-2" style="float: right;">ADD HABIT</button>
 </a>
@@ -37,7 +36,6 @@
             <th scope="col">Friday</th>
             <th scope="col">Saturday</th>
             <th scope="col">Sunday</th>
-            <th scope="col">Total</th>
           </tr>
           </thead>
           {% for habit in habits %}
@@ -93,7 +91,6 @@
               <td>-</td>
             {% endif %}
 
-            <td>-</td>
           </td>
           <tr>
             <td>Hours in a day</td>
@@ -104,7 +101,6 @@
             <td>{{ habit.friday_hours }}</td>
             <td>{{ habit.saturday_hours }}</td>
             <td>{{ habit.sunday_hours }}</td>
-            <td>---</td>
 
           </tr>
           </tbody>
