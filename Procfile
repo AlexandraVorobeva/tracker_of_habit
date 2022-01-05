@@ -1,0 +1,1 @@
+web: gunicorn tracker_of_habit.wsgi --log-file -
