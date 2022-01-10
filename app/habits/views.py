@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import WeekOfHabit, GroupOfHabits, Habit
+from .models import WeekOfHabit, GroupOfHabits, Habit, Notes
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -27,7 +27,6 @@ class TableOfWeek(LoginRequiredMixin, ListView):
         return context
 
 
-
 class Habits(LoginRequiredMixin, ListView):
     model = Habit
     template_name = 'habit_list.html'
@@ -37,6 +36,17 @@ class Habits(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['groups'] = GroupOfHabits.objects.all()
         context['habits'] = context['habits'].filter(user=self.request.user)
+        return context
+
+class Notess(LoginRequiredMixin, ListView):
+    model = Notes
+    template_name = 'notes.html'
+    context_object_name = 'notes'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['notes'] = Notes.objects.all()
+        context['notes'] = context['notes'].filter(user=self.request.user)
         return context
 
 

@@ -45,3 +45,12 @@ class WeekOfHabit(models.Model):
     sunday_hours = models.FloatField(default=0, blank=True)
 
 
+class Notes(models.Model):    #поменять на единственное число
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    habit = models.ForeignKey(Habit, on_delete=models.CASCADE, )
+    title = models.CharField(max_length=150, db_index=True, blank=True)
+    slug = models.SlugField(max_length=150, blank=True, unique=True)
+    body = models.TextField(blank=True)
+    date_pub = models.DateTimeField(auto_now_add=True)
+
+
