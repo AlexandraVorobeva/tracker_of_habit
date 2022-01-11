@@ -8,6 +8,7 @@ from django.contrib.auth import login
 
 
 class UserLoginView(LoginView):
+    """Class for user login."""
     template_name = 'users_auth/login.html'
     fields = '__all__'
     redirect_authenticated_user = True
@@ -17,6 +18,7 @@ class UserLoginView(LoginView):
 
 
 class RegisterPage(FormView):
+    """Class for user's registration."""
     template_name = 'users_auth/register.html'
     form_class = UserCreationForm
     redirect_authenticated_user = True

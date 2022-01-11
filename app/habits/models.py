@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 
 class GroupOfHabits(models.Model):
+    """Database model of group of habits."""
     name = models.CharField(max_length=200, null=True)
 
     def __str__(self):
@@ -10,6 +11,7 @@ class GroupOfHabits(models.Model):
 
 
 class Habit(models.Model):
+    """Database model of habit."""
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200)
     group = models.ForeignKey(GroupOfHabits, on_delete=models.CASCADE)
@@ -19,6 +21,7 @@ class Habit(models.Model):
 
 
 class WeekOfHabit(models.Model):
+    """Database model of table of week habits."""
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     habit = models.ForeignKey(Habit, on_delete=models.CASCADE)
 
@@ -44,7 +47,8 @@ class WeekOfHabit(models.Model):
     sunday_hours = models.FloatField(default=0, blank=True)
 
 
-class Notes(models.Model):    #поменять на единственное число
+class Notes(models.Model):
+    """Database model of notes."""
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     habit = models.ForeignKey(Habit, on_delete=models.CASCADE, )
     title = models.CharField(max_length=150, db_index=True, blank=True)
