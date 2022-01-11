@@ -41,8 +41,12 @@ class Habits(LoginRequiredMixin, ListView):
 
 class HabitCreate(LoginRequiredMixin, CreateView):
     model = Habit
-    fields = '__all__'
+    fields = ['name', 'group']
     success_url = reverse_lazy('habit')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(HabitCreate, self).form_valid(form)
 
 
 class HabitDelete(LoginRequiredMixin, DeleteView):
@@ -64,7 +68,8 @@ class WeekOfHabitCreate(LoginRequiredMixin, CreateView):
 
 class WeekOfHabitUpdate(LoginRequiredMixin, UpdateView):
     model = WeekOfHabit
-    fields = '__all__'
+    fields = ['monday', 'monday_hours', 'tuesday', 'tuesday_hours', 'wednesday', 'wednesday_hours', 'thursday',
+              'thursday_hours', 'friday', 'friday_hours', 'saturday', 'saturday_hours', 'sunday', 'sunday_hours']
     success_url = reverse_lazy('table')
     template_name = 'table/week_habit_form.html'
 
@@ -104,9 +109,13 @@ class Notess(LoginRequiredMixin, ListView):
 
 class NotesCreate(LoginRequiredMixin, CreateView):
     model = Notes
-    fields = '__all__'
+    fields = ['habit', 'title', 'slug', 'body']
     template_name = 'notes/notes_form.html'
     success_url = reverse_lazy('notes')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(NotesCreate, self).form_valid(form)
 
 
 class NotesDelete(LoginRequiredMixin, DeleteView):
