@@ -19,5 +19,8 @@ urlpatterns = [
     path('group-delete/<int:pk>/', views.GroupOfHabitDelete.as_view(), name='group-delete'),
     path('group-create/', views.GroupOfHabitCreate.as_view(), name='group-create'),
 
+    path('note-create/', views.NotesCreate.as_view(), name='note-create'),
+    path('note-delete/<int:pk>/', views.NotesDelete.as_view(), name='note-delete'),
+
 
 ]

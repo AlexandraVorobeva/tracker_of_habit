@@ -1,6 +1,6 @@
 {% extends "index.html" %}
 {% block content %}
-<a href="">
+<a href="{% url 'note-create' %}">
     <button type="button" class="btn btn-outline-dark btn btn-outline-light me-2" style="float: right;">ADD NOTE</button>
 </a>
 <center>
@@ -22,7 +22,7 @@
           <div class="d-flex justify-content-between align-items-center">
               <small class="text-muted">{{ note.date_pub }}</small>
             <div class="btn-group">
-              <a href="">
+              <a href="{% url 'note-delete' note.id %}">
                 <button type="button" class="btn btn-sm btn-outline-secondary">Delete note</button>
               </a>
             </div>

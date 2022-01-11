@@ -38,17 +38,6 @@ class Habits(LoginRequiredMixin, ListView):
         context['habits'] = context['habits'].filter(user=self.request.user)
         return context
 
-class Notess(LoginRequiredMixin, ListView):
-    model = Notes
-    template_name = 'notes.html'
-    context_object_name = 'notes'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['notes'] = Notes.objects.all()
-        context['notes'] = context['notes'].filter(user=self.request.user)
-        return context
-
 
 class HabitCreate(LoginRequiredMixin, CreateView):
     model = Habit
@@ -101,6 +90,28 @@ class GroupOfHabitDelete(LoginRequiredMixin, DeleteView):
     template_name = 'group/group_confirm_delete.html'
 
 
+class Notess(LoginRequiredMixin, ListView):
+    model = Notes
+    template_name = 'notes.html'
+    context_object_name = 'notes'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['notes'] = Notes.objects.all()
+        context['notes'] = context['notes'].filter(user=self.request.user)
+        return context
 
 
+class NotesCreate(LoginRequiredMixin, CreateView):
+    model = Notes
+    fields = '__all__'
+    template_name = 'notes/notes_form.html'
+    success_url = reverse_lazy('notes')
+
+
+class NotesDelete(LoginRequiredMixin, DeleteView):
+    model = Notes
+    context_object_name = 'notes'
+    template_name = 'notes/notes_confirm_delete.html'
+    success_url = reverse_lazy('notes')
 
